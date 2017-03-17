@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -63,7 +64,11 @@ public class Controller implements Initializable{
 
     @FXML
     public void step() {
-        model.bubbleStep();
+        boolean notDone;
+        notDone = model.bubbleStep();
+        if (notDone == false) {
+            JOptionPane.showMessageDialog(null, "Shit is sorted", "Done", JOptionPane.INFORMATION_MESSAGE);
+        }
         repaint();
     }
 
