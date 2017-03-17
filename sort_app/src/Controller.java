@@ -21,13 +21,7 @@ public class Controller implements Initializable{
     public GraphicsContext g;
     private Model model;
 
-    private static int[] xValues = {0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300,
-                                    320, 340, 360, 380, 400};
-
-
-
-    private int widthObjects = 18;
-
+    
 
 
     //fillRect(double x, double y, double w, double h
@@ -71,8 +65,5 @@ public class Controller implements Initializable{
         }
         repaint();
     }
-
-
-
 
 }
