@@ -12,13 +12,15 @@
 
     <top>
         <ToolBar>
-            <Button id="step" text="one step" fx:id="step" onAction="#step" GridPane.columnIndex="0" />
+            <Button id="step" text="one step" fx:id="step" onAction="#step" />
             <padding><Insets left="5" right="5" /> </padding>
-            <TextField id="sizeInterval" fx:id="sizeInterval" GridPane.columnIndex="2"/>
+            <TextField id="sizeInterval" fx:id="sizeInterval" />
 
-            <Button id="setInterval" text="set and start" fx:id="setInterval" GridPane.columnIndex="4"/>
+            <Button id="setInterval" text="set and start" fx:id="setInterval" />
 
-            <Button id="stop" text="stop" fx:id="stop" GridPane.columnIndex="6"/>
+            <Button id="stop" text="stop" fx:id="stop" />
+
+            <Button id="reset" text="reset" fx:id="reset" onAction="#reset"  />
         </ToolBar>
 
     </top>
