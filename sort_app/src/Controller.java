@@ -38,29 +38,33 @@ public class Controller implements Initializable{
         this.model = new Model();
 
 
-        g.setFill(Color.LIGHTBLUE);
-        g.fillRect(0, 0, 400, 400);
-        g.save();
-        g.setFill(Color.DARKGREY);
-        g.fillRect(0, 380, 18, 20);
-        g.fillRect(20, 360, 18, 40);
-        g.fillRect(40, 340, 18, 60);
-        g.fillRect(60, 320, 18, 80);
-        g.fillRect(80, 300, 18, 100);
-        g.fillRect(100, 280, 18, 120);
+        repaint();
 
 
     }
 
+    public void repaint() {
+        int[] data = model.getSortableObjects();
+        g.setFill(Color.LIGHTBLUE);
+        g.fillRect(0, 0, 400, 400);
+        g.setFill(Color.DARKGREY);
+
+        for(int i = 0; i < data.length; i++) {
+            g.fillRect(i*20, 400-data[i], 18, data[i]);
+        }
+
+    }
+
+
     @FXML
     public void reset () {
-        g.fillRect(120, 260, 18, 140);
+        this.initialize(null, null);
     }
 
     @FXML
     public void step() {
         model.bubbleStep();
-        System.out.println("\n");
+        repaint();
     }
 
 
