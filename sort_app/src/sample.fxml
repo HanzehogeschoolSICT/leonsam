@@ -1,26 +1,38 @@
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
-
-
+<?import javafx.collections.*?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import java.lang.String?>
+
+
 <BorderPane fx:controller="Controller"
             xmlns:fx="http://javafx.com/fxml" prefHeight="500" prefWidth="600" stylesheets="style.css">
 
     <top>
         <ToolBar>
-            <Button id="step" text="one step" fx:id="step" onAction="#step" />
+            <Button text="one step" fx:id="step" onAction="#step" />
             <padding><Insets left="5" right="5" /> </padding>
-            <TextField id="sizeInterval" fx:id="sizeInterval" />
+            <TextField fx:id="sizeInterval" promptText="interval in ms, DV:100"/>
 
-            <Button id="setInterval" text="set and start" fx:id="setInterval" />
+            <Button text="start" fx:id="setInterval" onAction="#startWithInterval"/>
 
-            <Button id="stop" text="stop" fx:id="stop" />
+            <Button text="stop" fx:id="stop" onAction="#stopIntervalThread"/>
 
-            <Button id="reset" text="reset" fx:id="reset" onAction="#reset"  />
+            <Button text="reset" fx:id="reset" onAction="#reset"  />
+
+            <ChoiceBox fx:id="choicebox" value="bubblesort">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="bubblesort" />
+                        <String fx:value="insertionsort" />
+                        <String fx:value="quicksort" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
         </ToolBar>
 
     </top>
