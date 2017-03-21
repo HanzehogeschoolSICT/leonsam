@@ -21,11 +21,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        //int[] myList = new int[10];
-        //Model x = new Model(myList);
         launch(args);
-        //while(x.notSorted){
-        //    x.bubbleStep();
-        //}
+
     }
 }

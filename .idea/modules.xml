@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/boggle/boggle.iml" filepath="$PROJECT_DIR$/boggle/boggle.iml" />
       <module fileurl="file://$PROJECT_DIR$/sort_app/sort_app.iml" filepath="$PROJECT_DIR$/sort_app/sort_app.iml" />
     </modules>
   </component>
