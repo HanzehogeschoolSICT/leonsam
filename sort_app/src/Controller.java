@@ -44,14 +44,14 @@ public class Controller extends Thread implements Initializable {
             g.setFill(Color.DARKGRAY);
             g.fillRect(i * 20, 400 - data[i], 18, data[i]);
 
-            if(i == model.location || i == model.location+1) {
+/*            if(i == model.location || i == model.location+1) {
                 g.setFill(Color.ORANGE);
                 g.fillRect(i * 20, 400 - data[i], 18, data[i]);
             }
             if(i > model.getSortableObjects().length - model.counter - 1){
                 g.setFill(Color.RED);
                 g.fillRect(i * 20, 400 - data[i], 18, data[i]);
-            }
+            }*/
         }
 
     }
@@ -76,11 +76,15 @@ public class Controller extends Thread implements Initializable {
                 break;
 
             case "insertionsort":
-                //TODO
+                notDone = model.insertionStep();
+                if (notDone == false){
+                    JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
+                }
+                repaint();
                 break;
 
             case "quicksort":
-                //TODO
+                model.quickStep();
                 break;
 
         }
@@ -115,6 +119,7 @@ public class Controller extends Thread implements Initializable {
                           break;
 
                       case "insertionsort":
+                          notDone = model.insertionStep();
                           break;
 
                       case "quicksort":
