@@ -25,10 +25,7 @@ public class Controller extends Thread implements Initializable {
     public static volatile boolean killFlag = false;
 
 
-
-
     //fillRect(double x, double y, double w, double h
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         g = canvas.getGraphicsContext2D();
@@ -41,10 +38,16 @@ public class Controller extends Thread implements Initializable {
         int[] data = model.getSortableObjects();
         g.setFill(Color.LIGHTBLUE);
         g.fillRect(0, 0, 400, 400);
-        g.setFill(Color.DARKGREY);
 
         for(int i = 0; i < data.length; i++) {
-            g.fillRect(i*20, 400-data[i], 18, data[i]);
+            System.out.println(model.location);
+            if(i == model.location || i == model.location+1){
+                g.setFill(Color.ORANGE);
+                g.fillRect(i*20, 400-data[i], 18, data[i]);
+            }else{
+                g.setFill(Color.DARKGRAY);
+                g.fillRect(i * 20, 400 - data[i], 18, data[i]);
+            }
         }
 
     }
@@ -63,7 +66,7 @@ public class Controller extends Thread implements Initializable {
                 boolean notDone;
                 notDone = model.bubbleStep();
                 if (notDone == false) {
-                    JOptionPane.showMessageDialog(null, "Shit is sorted", "Done", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
                 }
                 repaint();
                 break;
@@ -87,7 +90,7 @@ public class Controller extends Thread implements Initializable {
             try {
                 this.interval = Long.parseLong(tf);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "You did not fill in a number dumbass", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You did not fill in a number.", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
         }
@@ -122,7 +125,7 @@ public class Controller extends Thread implements Initializable {
                   }
               }
 
-              JOptionPane.showMessageDialog(null, "Shit is sorted", "Done", JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
 
           }
         };
