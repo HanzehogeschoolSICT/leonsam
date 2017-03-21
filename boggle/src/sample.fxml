@@ -1,4 +1,30 @@
-<?import javafx.scene.layout.GridPane?>
-<GridPane fx:controller="Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ListView?>
+
+<BorderPane fx:controller="Controller"
+            xmlns:fx="http://javafx.com/fxml" prefHeight="500" prefWidth="600">
+
+    <top>
+        <ToolBar>
+            <Button text="new playboard" fx:id="newBoard" />
+            <padding><Insets left="5" right="5" /> </padding>
+
+            <Button text="find words" fx:id="findWords" />
+
+
+        </ToolBar>
+
+    </top>
+
+    <center>
+        <Canvas fx:id="canvas" height="500" width="500" />
+    </center>
+
+    <right>
+        <ListView fx:id="listView" prefHeight="500" prefWidth="200"/>
+    </right>
+</BorderPane>
