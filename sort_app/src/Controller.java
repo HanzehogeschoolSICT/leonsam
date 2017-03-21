@@ -126,6 +126,7 @@ public class Controller extends Thread implements Initializable {
 
           }
         };
+        thread.setDaemon(true);
         thread.start();
     }
 
