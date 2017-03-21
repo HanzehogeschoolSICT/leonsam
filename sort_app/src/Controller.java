@@ -40,12 +40,16 @@ public class Controller extends Thread implements Initializable {
         g.fillRect(0, 0, 400, 400);
 
         for(int i = 0; i < data.length; i++) {
-            System.out.println(model.location);
-            if(i == model.location || i == model.location+1){
+
+            g.setFill(Color.DARKGRAY);
+            g.fillRect(i * 20, 400 - data[i], 18, data[i]);
+
+            if(i == model.location || i == model.location+1) {
                 g.setFill(Color.ORANGE);
-                g.fillRect(i*20, 400-data[i], 18, data[i]);
-            }else{
-                g.setFill(Color.DARKGRAY);
+                g.fillRect(i * 20, 400 - data[i], 18, data[i]);
+            }
+            if(i > model.getSortableObjects().length - model.counter - 1){
+                g.setFill(Color.RED);
                 g.fillRect(i * 20, 400 - data[i], 18, data[i]);
             }
         }
