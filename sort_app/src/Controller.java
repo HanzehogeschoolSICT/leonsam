@@ -72,9 +72,11 @@ public class Controller extends Thread implements Initializable {
                 break;
 
             case "insertionsort":
+                //TODO
                 break;
 
             case "quicksort":
+                //TODO
                 break;
 
         }
