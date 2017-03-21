@@ -26,6 +26,8 @@ public class Model {
         return false;
     }
 
+
+
     public void print() {
         for(int i=0; i<this.sortableObjects.length; i++){
             System.out.println(this.sortableObjects[i]);

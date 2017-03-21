@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javax.swing.*;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 
 /**
@@ -22,6 +21,7 @@ public class Controller extends Thread implements Initializable {
     private Model model;
     private long interval;
     private Thread thread;
+    private String algorithm;
     public static volatile boolean killFlag = false;
 
 
@@ -48,7 +48,6 @@ public class Controller extends Thread implements Initializable {
         }
 
     }
-
 
     @FXML
     public void reset () {
@@ -82,12 +81,13 @@ public class Controller extends Thread implements Initializable {
     @FXML
     public void startWithInterval() {
         this.interval = 100;
+        this.algorithm = choicebox.getValue();
         String tf = sizeInterval.getText();
         if (!tf.equals("")) {
             try {
                 this.interval = Long.parseLong(tf);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "You did not fill in a number dumbass", "Done", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You did not fill in a number dumbass", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
         }
@@ -99,7 +99,7 @@ public class Controller extends Thread implements Initializable {
 
               while (notDone) {
 
-                  switch (choicebox.getValue()) {
+                  switch (algorithm) {
 
                       case "bubblesort":
                           notDone = model.bubbleStep();
@@ -126,16 +126,14 @@ public class Controller extends Thread implements Initializable {
 
           }
         };
-
         thread.start();
-
-
-
     }
+
 
     public void stopIntervalThread() {
         thread.interrupt();
     }
+
 
     public long getInterval() {
         return interval;
