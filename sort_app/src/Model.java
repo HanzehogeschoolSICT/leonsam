@@ -1,29 +1,39 @@
-import java.util.Random;
-
 /**
  * Created by leonv on 15-3-2017.
  */
 public class Model {
     private int[] sortableObjects = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300,
             320, 340, 360, 380, 400};
+    int location = 0;
+    int counter = 0;
+
 
     public Model() {
         shuffle(sortableObjects);
     }
 
-    public boolean bubbleStep(){
-        int i;
-        for(i=0; i<this.sortableObjects.length - 1; i++){
-            if(this.sortableObjects[i] > this.sortableObjects[i+1]){
-                int x = this.sortableObjects[i];
-                this.sortableObjects[i] = this.sortableObjects[i+1];
-                this.sortableObjects[i+1] = x;
-                print();
-                return true;
-            }
+
+    public boolean bubbleStep() {
+
+        if (this.sortableObjects[location] > this.sortableObjects[location + 1]) {
+            int x = this.sortableObjects[location];
+            this.sortableObjects[location] = this.sortableObjects[location + 1];
+            this.sortableObjects[location + 1] = x;
+            location ++;
+        } else {
+            location ++;
         }
-        print();
-        return false;
+
+        if(location == sortableObjects.length-1-counter){
+            location = 0;
+            counter ++;
+        }
+
+        if(counter == sortableObjects.length-1){
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
@@ -35,10 +45,10 @@ public class Model {
     }
 
 
-
     public int[] getSortableObjects() {
         return sortableObjects;
     }
+
 
     //Fisher-Yates shuffle; source: https://www.dotnetperls.com/shuffle-java
     static void shuffle(int[] array) {
