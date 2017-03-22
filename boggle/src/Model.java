@@ -1,3 +1,6 @@
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,9 +12,9 @@ import java.util.TreeSet;
  * Created by leonv on 22-3-2017.
  */
 public class Model {
-private TreeSet<String> treeSet = new TreeSet();
-private String[][] playBoard;
-private int boardSize = 4;
+    private TreeSet<String> treeSet = new TreeSet();
+    private String[][] playBoard;
+    private int boardSize = 4;
 
     public Model(){
         boardBuilder(boardSize);
@@ -19,7 +22,7 @@ private int boardSize = 4;
 
     public void dictonaryBuilder(){
         try{
-            FileReader fileReader = new FileReader("boggle/src/dict.txt");
+            FileReader fileReader = new FileReader("/home/samikroon/IdeaProjects/leonsam/boggle/src/dict.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String word;
             while((word = bufferedReader.readLine()) != null){
@@ -52,7 +55,12 @@ private int boardSize = 4;
 
     }
 
-    public void setBoardSize(int size) {
+    public void boggleSolver() {
+
+    }
+
+
+    public void setSize(int size) {
         this.boardSize = size;
     }
 }
