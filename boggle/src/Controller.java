@@ -14,14 +14,13 @@ public class Controller implements Initializable{
 
     @FXML private Canvas canvas;
     @FXML private ListView<String> listView;
-    @FXML private TextField sizeInput;
+    @FXML private TextField sizeBoard;
     public GraphicsContext g;
     private Model model;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new Model();
-        model.dictonaryBuilder();
         g = canvas.getGraphicsContext2D();
         repaint();
     }
@@ -35,7 +34,7 @@ public class Controller implements Initializable{
     @FXML
     public void setBoardSize() {
         int boardSize = 4;
-        String tf = sizeInput.getText();
+        String tf = sizeBoard.getText();
         if (!tf.equals("")) {
             try {
                 boardSize = Integer.parseInt(tf);
