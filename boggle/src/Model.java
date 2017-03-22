@@ -1,8 +1,8 @@
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.TreeSet;
 
 /**
@@ -10,8 +10,11 @@ import java.util.TreeSet;
  */
 public class Model {
 private TreeSet<String> treeSet = new TreeSet();
+private String[][] playBoard;
+private int boardSize = 4;
 
     public Model(){
+        boardBuilder(boardSize);
     }
 
     public void dictonaryBuilder(){
@@ -33,4 +36,19 @@ private TreeSet<String> treeSet = new TreeSet();
 
         }
 */    }
+
+    public void boardBuilder(int size){
+        playBoard = new String[size][size];
+        Random random = new Random();
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                playBoard[i][j] = Character.toString((char)(random.nextInt(122-97)+97));
+                System.out.printf(playBoard[i][j]);
+            }
+            System.out.println("");
+        }
+
+
+    }
 }
