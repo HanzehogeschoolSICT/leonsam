@@ -1,3 +1,6 @@
+import java.util.Observable;
+
+
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -7,21 +10,23 @@ import java.util.TreeSet;
 /**
  * Created by leonv on 22-3-2017.
  */
-public class Model {
+public class Model extends Observable{
     private TreeSet<String> treeSet = new TreeSet();
     private String[][] playBoard;
     private int boardSize = 4;
     private ArrayList<String> results = new ArrayList<String>();
     private boolean history[][];
+    private int finishCheck;
 
-    public Model(){
+    public Model(Controller controller){
+        this.addObserver(controller);
         dictonaryBuilder();
         boardBuilder();
     }
 
     public void dictonaryBuilder(){
         try{
-            FileReader fileReader = new FileReader("boggle/src/dict.txt");
+            FileReader fileReader = new FileReader("/home/samikroon/IdeaProjects/leonsam/boggle/src/dict.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String word;
             while((word = bufferedReader.readLine()) != null){
@@ -59,6 +64,7 @@ public class Model {
     }
 
     public void solver() {
+        finishCheck=0;
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 recursiveSolver(playBoard[i][j], history, i, j);
@@ -72,6 +78,8 @@ public class Model {
 
         if(treeSet.contains(currentWord)){
             results.add(currentWord);
+            setChanged();
+            notifyObservers();
             System.out.println(currentWord);
         }
 
@@ -117,5 +125,9 @@ public class Model {
     public void setSize(int size) {
         this.boardSize = size;
         boardBuilder();
+    }
+
+    public ArrayList getResults() {
+        return results;
     }
 }

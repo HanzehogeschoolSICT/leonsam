@@ -1,3 +1,4 @@
+import java.util.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -8,9 +9,10 @@ import javafx.scene.paint.Color;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable{
+public class Controller implements Initializable, Observer{
 
     @FXML private Canvas canvas;
     @FXML private ListView<String> listView;
@@ -20,10 +22,9 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        model = new Model();
+        model = new Model(this);
         g = canvas.getGraphicsContext2D();
         repaint();
-        model.solver();
     }
 
     public void repaint() {
@@ -31,6 +32,18 @@ public class Controller implements Initializable{
         g.fillRect(0, 0, 500, 500);
 
     }
+
+    @FXML
+    public void solve() {
+        model.solver();
+
+    }
+
+    public void update(Observable obs, Object x) {
+
+    }
+
+
 
     @FXML
     public void setBoardSize() {
