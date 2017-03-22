@@ -13,9 +13,12 @@ public class Controller implements Initializable{
     @FXML private Canvas canvas;
     @FXML private ListView<String> listView;
     public GraphicsContext g;
+    private Model model;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        model = new Model();
+        model.dictonaryBuilder();
         g = canvas.getGraphicsContext2D();
         repaint();
     }
