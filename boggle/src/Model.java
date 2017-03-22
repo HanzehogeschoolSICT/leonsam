@@ -16,7 +16,8 @@ public class Model extends Observable{
     private int boardSize = 4;
     private ArrayList<String> results = new ArrayList<String>();
     private boolean history[][];
-    private int finishCheck;
+    private String[] vowels = {"a","e","i","o","u"};
+
 
     public Model(Controller controller){
         this.addObserver(controller);
@@ -26,7 +27,7 @@ public class Model extends Observable{
 
     public void dictonaryBuilder(){
         try{
-            FileReader fileReader = new FileReader("/home/samikroon/IdeaProjects/leonsam/boggle/src/dict.txt");
+            FileReader fileReader = new FileReader("boggle/src/dict.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String word;
             while((word = bufferedReader.readLine()) != null){
@@ -50,11 +51,14 @@ public class Model extends Observable{
         playBoard = new String[boardSize][boardSize];
         Random random = new Random();
         history = new boolean[boardSize][boardSize];
-
         for(int i = 0; i < boardSize; i++){
             for(int j = 0; j < boardSize; j++){
-                playBoard[i][j] = Character.toString((char)(random.nextInt(122-97)+97));
-                history[i][j] = false;
+                if(random.nextDouble()<0.4){
+                    playBoard[i][j] = vowels[random.nextInt(vowels.length-1)];
+                }else {
+                    playBoard[i][j] = Character.toString((char) (random.nextInt(122 - 97) + 97));
+                    history[i][j] = false;
+                }
                 System.out.print(playBoard[i][j]);
             }
             System.out.println("");
@@ -64,7 +68,6 @@ public class Model extends Observable{
     }
 
     public void solver() {
-        finishCheck=0;
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 recursiveSolver(playBoard[i][j], history, i, j);
@@ -75,12 +78,10 @@ public class Model extends Observable{
     public void recursiveSolver(String currentWord, boolean[][] history, int x, int y){
         boolean[][] temp = history.clone();
         temp[x][y] = true;
-
         if(treeSet.contains(currentWord)){
             results.add(currentWord);
             setChanged();
             notifyObservers();
-            System.out.println(currentWord);
         }
 
         if((treeSet.subSet(currentWord,currentWord+Character.toString(Character.MAX_VALUE))).isEmpty()){

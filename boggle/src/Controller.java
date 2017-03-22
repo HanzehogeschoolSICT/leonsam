@@ -40,7 +40,7 @@ public class Controller implements Initializable, Observer{
     }
 
     public void update(Observable obs, Object x) {
-
+        System.out.println(model.getResults());
     }
 
 
