@@ -23,6 +23,7 @@ public class Controller implements Initializable{
         model = new Model();
         g = canvas.getGraphicsContext2D();
         repaint();
+        model.solver();
     }
 
     public void repaint() {
