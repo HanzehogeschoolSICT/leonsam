@@ -11,14 +11,18 @@ import java.util.TreeSet;
  * Created by leonv on 22-3-2017.
  */
 public class Model extends Observable {
-    private TreeSet<String> treeSet = new TreeSet();
+    private TreeSet<String> treeSet;
     private String[][] playBoard;
     private int boardSize = 4;
-    private ArrayList<String> results = new ArrayList<String>();
+    private ArrayList<String> results;
     private boolean history[][];
+    private ArrayList<boolean[][]> resultMatrixes;
     private int finishCheck;
 
     public Model(Controller controller){
+        treeSet = new TreeSet<>();
+        results  = new ArrayList<>();
+        resultMatrixes = new ArrayList<>();
         this.addObserver(controller);
         dictonaryBuilder();
         boardBuilder();
@@ -88,6 +92,7 @@ public class Model extends Observable {
 
         if(treeSet.contains(currentWord)){
             results.add(currentWord);
+            resultMatrixes.add(temp);
             setChanged();
             notifyObservers();
             System.out.println(currentWord);
