@@ -51,4 +51,8 @@ private int boardSize = 4;
 
 
     }
+
+    public void setBoardSize(int size) {
+        this.boardSize = size;
+    }
 }
