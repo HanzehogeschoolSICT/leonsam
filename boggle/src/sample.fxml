@@ -5,6 +5,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.ListView?>
 
+<?import javafx.scene.control.TextField?>
 <BorderPane fx:controller="Controller"
             xmlns:fx="http://javafx.com/fxml" prefHeight="500" prefWidth="600">
 
@@ -14,6 +15,10 @@
             <padding><Insets left="5" right="5" /> </padding>
 
             <Button text="find words" fx:id="findWords" />
+
+            <TextField fx:id="sizeBoard" promptText="DF size = 4, MIN = 3"/>
+
+            <Button text="set size" fx:id="setSize" onAction="#setBoardSize"/>
 
 
         </ToolBar>
