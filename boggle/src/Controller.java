@@ -1,4 +1,8 @@
 import java.util.Observable;
+
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -19,10 +23,12 @@ public class Controller implements Initializable, Observer{
     @FXML private TextField sizeBoard;
     public GraphicsContext g;
     private Model model;
+    protected ListProperty<String> listProperty = new SimpleListProperty<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new Model(this);
+        listView.itemsProperty().bind(listProperty);
         g = canvas.getGraphicsContext2D();
         repaint();
     }
@@ -40,7 +46,7 @@ public class Controller implements Initializable, Observer{
     }
 
     public void update(Observable obs, Object x) {
-        System.out.println(model.getResults());
+        listProperty.set(FXCollections.observableArrayList(model.getResults()));
     }
 
 

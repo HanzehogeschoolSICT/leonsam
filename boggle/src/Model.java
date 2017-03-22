@@ -1,16 +1,16 @@
-import java.util.Observable;
 
 
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 import java.util.TreeSet;
 
 /**
  * Created by leonv on 22-3-2017.
  */
-public class Model extends Observable{
+public class Model extends Observable {
     private TreeSet<String> treeSet = new TreeSet();
     private String[][] playBoard;
     private int boardSize = 4;
@@ -70,13 +70,23 @@ public class Model extends Observable{
     public void solver() {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                recursiveSolver(playBoard[i][j], history, i, j);
+                recursiveSolver(playBoard[i][j], history.clone(), i, j);
             }
         }
     }
 
     public void recursiveSolver(String currentWord, boolean[][] history, int x, int y){
-        boolean[][] temp = history.clone();
+        boolean[][] temp = new boolean[boardSize][];
+        for (int i = 0; i < boardSize; i++) {
+            temp[i] = history[i].clone();
+        }
+
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                System.out.print(temp[i][j]);
+            }
+            System.out.print("\n");
+        }
         temp[x][y] = true;
         if(treeSet.contains(currentWord)){
             results.add(currentWord);
@@ -92,23 +102,23 @@ public class Model extends Observable{
             recursiveSolver(currentWord+playBoard[x-1][y-1], temp, x-1, y-1);
         }
 
-        if(x-1 > 0 &&!temp[x-1][y]){
+        if(x-1 > 0 && !temp[x-1][y]){
             recursiveSolver(currentWord+playBoard[x-1][y], temp, x-1, y);
         }
 
-        if(x-1 > 0 && y+1 < boardSize &&!temp[x-1][y+1]){
+        if(x-1 > 0 && y+1 < boardSize && !temp[x-1][y+1]){
             recursiveSolver(currentWord+playBoard[x-1][y+1], temp, x-1, y+1);
         }
 
-        if(y-1 > 0 &&!temp[x][y-1]){
+        if(y-1 > 0 && !temp[x][y-1]){
             recursiveSolver(currentWord+playBoard[x][y-1], temp, x, y-1);
         }
 
-        if(y+1 < boardSize &&!temp[x][y+1]){
+        if(y+1 < boardSize && !temp[x][y+1]){
             recursiveSolver(currentWord+playBoard[x][y+1], temp, x, y+1);
         }
 
-        if(x+1 < boardSize && y-1 > 0 &&!temp[x+1][y-1]){
+        if(x+1 < boardSize && y-1 > 0 && !temp[x+1][y-1]){
             recursiveSolver(currentWord+playBoard[x+1][y-1], temp, x+1, y-1);
         }
 
@@ -116,7 +126,7 @@ public class Model extends Observable{
             recursiveSolver(currentWord+playBoard[x+1][y], temp, x+1, y);
         }
 
-        if(x+1 < boardSize && y+1 < boardSize &&!temp[x+1][y+1]){
+        if(x+1 < boardSize && y+1 < boardSize && !temp[x+1][y+1]){
             recursiveSolver(currentWord+playBoard[x+1][y+1], temp, x+1, y+1);
         }
 
