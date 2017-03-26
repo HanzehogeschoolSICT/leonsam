@@ -20,7 +20,6 @@
 
             <Button text="set size" fx:id="setSize" onAction="#setBoardSize"/>
 
-
         </ToolBar>
 
     </top>
@@ -30,6 +29,6 @@
     </center>
 
     <right>
-        <ListView fx:id="listView" prefHeight="500" prefWidth="200"/>
+        <ListView fx:id="listView" onMouseClicked="#handleMouseClick" prefHeight="500" prefWidth="200"/>
     </right>
 </BorderPane>
