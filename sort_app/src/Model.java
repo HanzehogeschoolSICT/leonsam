@@ -72,7 +72,7 @@ public class Model {
     // quicksort based on http://www.geeksforgeeks.org/iterative-quick-sort/ variant
     // a stack is simulated to keep track of the divided array parts
     public boolean quickStep(){
-        
+
         // return true if stack is empty
         if (top == -1) {
             return false;
