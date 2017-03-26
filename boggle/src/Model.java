@@ -12,23 +12,24 @@ import java.util.TreeSet;
 public class Model extends Observable {
     private TreeSet<String> treeSet;
     private String[][] playBoard;
-    private int boardSize = 4;
+    private int boardSize;
     private ArrayList<String> results;
     private boolean history[][];
 
     private ArrayList<boolean[][]> resultMatrixes;
     private String[] vowels = {"a","e","i","o","u"};
 
-    public Model(Controller controller){
+    public Model(Controller controller, int boardSize){
         treeSet = new TreeSet<>();
         results  = new ArrayList<>();
         resultMatrixes = new ArrayList<>();
+        this.boardSize = boardSize;
         this.addObserver(controller);
-        dictonaryBuilder();
+        dictionaryBuilder();
         boardBuilder();
     }
 
-    public void dictonaryBuilder(){
+    public void dictionaryBuilder(){
         try{
             FileReader fileReader = new FileReader("boggle/src/dict.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -40,15 +41,7 @@ public class Model extends Observable {
             JOptionPane.showMessageDialog(null,"File not found!","Error",JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-
-//        System.out.println(treeSet.subSet("arb","arb"+Character.toString(Character.MAX_VALUE)));
-
-/*        Iterator it = treeSet.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-
-        }
-*/    }
+    }
 
     public void boardBuilder(){
         playBoard = new String[boardSize][boardSize];
@@ -62,17 +55,12 @@ public class Model extends Observable {
                     playBoard[i][j] = Character.toString((char) (random.nextInt(122 - 97) + 97));
                     history[i][j] = false;
                 }
-                System.out.print(playBoard[i][j]);
             }
-            System.out.println("");
         }
-
-
     }
 
     public void solver() {
-        this.results = new ArrayList<>();
-        history = new boolean[boardSize][boardSize];
+        resetResults();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 recursiveSolver(playBoard[i][j], history.clone(), i, j);
@@ -95,9 +83,7 @@ public class Model extends Observable {
             notifyObservers();
             for (int i = 0; i < boardSize; i++) {
                 for (int j = 0; j < boardSize; j++) {
-                    System.out.print(temp[i][j]);
                 }
-                System.out.print("\n");
             }
         }
 
@@ -158,5 +144,9 @@ public class Model extends Observable {
 
     public boolean[][] getResultMatrixes(int index) {
         return resultMatrixes.get(index);
+    }
+
+    public void resetResults() {
+        results = new ArrayList<String>();
     }
 }

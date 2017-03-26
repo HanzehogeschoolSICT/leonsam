@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Observable;
 
 import javafx.beans.property.ListProperty;
@@ -25,15 +26,15 @@ public class Controller implements Initializable, Observer{
     @FXML private ListView<String> listView;
     @FXML private TextField sizeBoard;
     public GraphicsContext g;
-
-    private Model model;
-    protected ListProperty<String> listProperty = new SimpleListProperty<>();
     Image image = new Image("dice.png");
     Image image2 = new Image("dice_2.png");
 
+    private Model model;
+    protected ListProperty<String> listProperty = new SimpleListProperty<>();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        model = new Model(this);
+        model = new Model(this,4);
         listView.itemsProperty().bind(listProperty);
         g = canvas.getGraphicsContext2D();
         repaint(null);
@@ -80,8 +81,9 @@ public class Controller implements Initializable, Observer{
         if (!tf.equals("")) {
             try {
                 boardSize = Integer.parseInt(tf);
-                model.setSize(boardSize);
+                model = new Model(this,boardSize);
                 repaint(null);
+                listView.getItems().clear();
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "You did not fill in a number.", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
