@@ -1,5 +1,4 @@
 
-
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class Model extends Observable {
         history = new boolean[boardSize][boardSize];
         for(int i = 0; i < boardSize; i++){
             for(int j = 0; j < boardSize; j++){
-                if(random.nextDouble()<0.4){
+                if(random.nextDouble()<0.3){
                     playBoard[i][j] = vowels[random.nextInt(vowels.length-1)];
                 }else {
                     playBoard[i][j] = Character.toString((char) (random.nextInt(122 - 97) + 97));
@@ -84,12 +83,6 @@ public class Model extends Observable {
             temp[i] = history[i].clone();
         }
 
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                System.out.print(temp[i][j]);
-            }
-            System.out.print("\n");
-        }
         temp[x][y] = true;
 
         if(treeSet.contains(currentWord)){
@@ -97,6 +90,12 @@ public class Model extends Observable {
             resultMatrixes.add(temp);
             setChanged();
             notifyObservers();
+            for (int i = 0; i < boardSize; i++) {
+                for (int j = 0; j < boardSize; j++) {
+                    System.out.print(temp[i][j]);
+                }
+                System.out.print("\n");
+            }
         }
 
         if((treeSet.subSet(currentWord,currentWord+Character.toString(Character.MAX_VALUE))).isEmpty()){
@@ -137,10 +136,17 @@ public class Model extends Observable {
 
     }
 
-
     public void setSize(int size) {
         this.boardSize = size;
         boardBuilder();
+    }
+
+    public int getSize(){
+        return this.boardSize;
+    }
+
+    public String[][] getPlayBoard(){
+        return playBoard;
     }
 
     public ArrayList getResults() {
