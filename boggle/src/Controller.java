@@ -83,7 +83,11 @@ public class Controller implements Initializable, Observer{
                 boardSize = Integer.parseInt(tf);
                 model = new Model(this,boardSize);
                 repaint(null);
-                listView.getItems().clear();
+
+                if (listView.getItems() != null) {
+                    listView.getItems().clear();
+                }
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "You did not fill in a number.", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
