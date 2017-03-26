@@ -15,6 +15,7 @@ public class Model extends Observable {
     private int boardSize = 4;
     private ArrayList<String> results;
     private boolean history[][];
+
     private ArrayList<boolean[][]> resultMatrixes;
     private String[] vowels = {"a","e","i","o","u"};
 
@@ -70,6 +71,8 @@ public class Model extends Observable {
     }
 
     public void solver() {
+        this.results = new ArrayList<>();
+        history = new boolean[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 recursiveSolver(playBoard[i][j], history.clone(), i, j);
@@ -151,5 +154,9 @@ public class Model extends Observable {
 
     public ArrayList getResults() {
         return results;
+    }
+
+    public boolean[][] getResultMatrixes(int index) {
+        return resultMatrixes.get(index);
     }
 }

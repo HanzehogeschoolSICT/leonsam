@@ -10,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -29,25 +29,37 @@ public class Controller implements Initializable, Observer{
     private Model model;
     protected ListProperty<String> listProperty = new SimpleListProperty<>();
     Image image = new Image("dice.png");
+    Image image2 = new Image("dice_2.png");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new Model(this);
         listView.itemsProperty().bind(listProperty);
         g = canvas.getGraphicsContext2D();
-        repaint();
+        repaint(null);
     }
 
-    public void repaint() {
+    public void repaint(boolean[][] locationArray) {
+
         String[][] currPlayBoard = model.getPlayBoard();
         g.setFill(Color.BLACK);
         g.fillRect(0, 0, 500, 500);
         g.setFill(Color.BLACK);
+        g.setFont(Font.font(200/model.getSize()));
         for(int i = 0; i < model.getSize(); i++){
             for(int j = 0; j < model.getSize(); j++){
-                g.drawImage(this.image, 500/model.getSize()*i,500/model.getSize()*j, (500/model.getSize()),(500/model.getSize()));
-                g.setFont(Font.font(200/model.getSize()));
-                g.fillText(currPlayBoard[i][j],500/model.getSize()*i+500/model.getSize()/2-10,500/model.getSize()*j+500/model.getSize()/2+10);
+                if(locationArray!=null) {
+                    if (locationArray[i][j]) {
+                        g.drawImage(this.image2, 500 / model.getSize() * i, 500 / model.getSize() * j, (500 / model.getSize()), (500 / model.getSize()));
+                        g.fillText(currPlayBoard[i][j], 500 / model.getSize() * i + 500 / model.getSize() / 2 - 10, 500 / model.getSize() * j + 500 / model.getSize() / 2 + 10);
+                    } else {
+                        g.drawImage(this.image, 500 / model.getSize() * i, 500 / model.getSize() * j, (500 / model.getSize()), (500 / model.getSize()));
+                        g.fillText(currPlayBoard[i][j], 500 / model.getSize() * i + 500 / model.getSize() / 2 - 10, 500 / model.getSize() * j + 500 / model.getSize() / 2 + 10);
+                    }
+                }else{
+                    g.drawImage(this.image, 500 / model.getSize() * i, 500 / model.getSize() * j, (500 / model.getSize()), (500 / model.getSize()));
+                    g.fillText(currPlayBoard[i][j], 500 / model.getSize() * i + 500 / model.getSize() / 2 - 10, 500 / model.getSize() * j + 500 / model.getSize() / 2 + 10);
+                }
             }
         }
     }
@@ -55,14 +67,11 @@ public class Controller implements Initializable, Observer{
     @FXML
     public void solve() {
         model.solver();
-
     }
 
     public void update(Observable obs, Object x) {
         listProperty.set(FXCollections.observableArrayList(model.getResults()));
     }
-
-
 
     @FXML
     public void setBoardSize() {
@@ -72,7 +81,7 @@ public class Controller implements Initializable, Observer{
             try {
                 boardSize = Integer.parseInt(tf);
                 model.setSize(boardSize);
-                repaint();
+                repaint(null);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "You did not fill in a number.", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
@@ -80,4 +89,7 @@ public class Controller implements Initializable, Observer{
         }
     }
 
+    public void handleMouseClick(MouseEvent mouseEvent) {
+        repaint(model.getResultMatrixes(listView.getSelectionModel().getSelectedIndex()));
+    }
 }

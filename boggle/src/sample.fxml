@@ -6,8 +6,6 @@
 <?import javafx.scene.control.ListView?>
 
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <BorderPane fx:controller="Controller"
             xmlns:fx="http://javafx.com/fxml" prefHeight="500" prefWidth="600">
 
@@ -31,6 +29,6 @@
     </center>
 
     <right>
-        <ListView fx:id="listView" prefHeight="500" prefWidth="200"/>
+        <ListView fx:id="listView" onMouseClicked="#handleMouseClick" prefHeight="500" prefWidth="200"/>
     </right>
 </BorderPane>
