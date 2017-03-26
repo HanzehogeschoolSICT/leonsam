@@ -84,7 +84,11 @@ public class Controller extends Thread implements Initializable {
                 break;
 
             case "quicksort":
-                model.quickStep();
+                notDone = model.quickStep();
+                if (notDone == false){
+                    JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
+                }
+                repaint();
                 break;
 
         }
@@ -123,6 +127,7 @@ public class Controller extends Thread implements Initializable {
                           break;
 
                       case "quicksort":
+                          notDone = model.quickStep();
                           break;
 
                   }

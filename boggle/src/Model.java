@@ -30,7 +30,7 @@ public class Model extends Observable {
 
     public void dictonaryBuilder(){
         try{
-            FileReader fileReader = new FileReader("boggle/src/dict.txt");
+            FileReader fileReader = new FileReader("/home/samikroon/IdeaProjects/leonsam/boggle/src/dict.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String word;
             while((word = bufferedReader.readLine()) != null){
@@ -84,17 +84,18 @@ public class Model extends Observable {
             temp[i] = history[i].clone();
         }
 
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                System.out.print(temp[i][j]);
-            }
-            System.out.print("\n");
-        }
+
         temp[x][y] = true;
 
         if(treeSet.contains(currentWord)){
             results.add(currentWord);
             resultMatrixes.add(temp);
+            for (int i = 0; i < boardSize; i++) {
+                for (int j = 0; j < boardSize; j++) {
+                    System.out.print(temp[i][j]);
+                }
+                System.out.print("\n");
+            }
             setChanged();
             notifyObservers();
         }
