@@ -73,9 +73,7 @@ public class Model extends Observable {
         for (int i = 0; i < boardSize; i++) {
             temp[i] = history[i].clone();
         }
-
         temp[x][y] = true;
-
         if(treeSet.contains(currentWord)){
             results.add(currentWord);
             resultMatrixes.add(temp);
@@ -86,43 +84,15 @@ public class Model extends Observable {
                 }
             }
         }
-
-        if((treeSet.subSet(currentWord,currentWord+Character.toString(Character.MAX_VALUE))).isEmpty()){
-           return;
-        }
-
-        if(x-1 > 0 && y-1 > 0 && !temp[x-1][y-1]){
-            recursiveSolver(currentWord+playBoard[x-1][y-1], temp, x-1, y-1);
-        }
-
-        if(x-1 > 0 && !temp[x-1][y]){
-            recursiveSolver(currentWord+playBoard[x-1][y], temp, x-1, y);
-        }
-
-        if(x-1 > 0 && y+1 < boardSize && !temp[x-1][y+1]){
-            recursiveSolver(currentWord+playBoard[x-1][y+1], temp, x-1, y+1);
-        }
-
-        if(y-1 > 0 && !temp[x][y-1]){
-            recursiveSolver(currentWord+playBoard[x][y-1], temp, x, y-1);
-        }
-
-        if(y+1 < boardSize && !temp[x][y+1]){
-            recursiveSolver(currentWord+playBoard[x][y+1], temp, x, y+1);
-        }
-
-        if(x+1 < boardSize && y-1 > 0 && !temp[x+1][y-1]){
-            recursiveSolver(currentWord+playBoard[x+1][y-1], temp, x+1, y-1);
-        }
-
-        if(x+1 < boardSize &&!temp[x+1][y]){
-            recursiveSolver(currentWord+playBoard[x+1][y], temp, x+1, y);
-        }
-
-        if(x+1 < boardSize && y+1 < boardSize && !temp[x+1][y+1]){
-            recursiveSolver(currentWord+playBoard[x+1][y+1], temp, x+1, y+1);
-        }
-
+        if((treeSet.subSet(currentWord,currentWord+Character.toString(Character.MAX_VALUE))).isEmpty()){return;}
+        if(x-1 > 0 && y-1 > 0 && !temp[x-1][y-1]){recursiveSolver(currentWord+playBoard[x-1][y-1], temp, x-1, y-1);}
+        if(x-1 > 0 && !temp[x-1][y]){recursiveSolver(currentWord+playBoard[x-1][y], temp, x-1, y);}
+        if(x-1 > 0 && y+1 < boardSize && !temp[x-1][y+1]){recursiveSolver(currentWord+playBoard[x-1][y+1], temp, x-1, y+1);}
+        if(y-1 > 0 && !temp[x][y-1]){recursiveSolver(currentWord+playBoard[x][y-1], temp, x, y-1);}
+        if(y+1 < boardSize && !temp[x][y+1]){recursiveSolver(currentWord+playBoard[x][y+1], temp, x, y+1);}
+        if(x+1 < boardSize && y-1 > 0 && !temp[x+1][y-1]){recursiveSolver(currentWord+playBoard[x+1][y-1], temp, x+1, y-1);}
+        if(x+1 < boardSize &&!temp[x+1][y]){recursiveSolver(currentWord+playBoard[x+1][y], temp, x+1, y);}
+        if(x+1 < boardSize && y+1 < boardSize && !temp[x+1][y+1]){recursiveSolver(currentWord+playBoard[x+1][y+1], temp, x+1, y+1);}
     }
 
     public void setSize(int size) {

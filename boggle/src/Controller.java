@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Observable;
-
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
