@@ -68,20 +68,16 @@ public class Model {
     // quicksort based on http://www.geeksforgeeks.org/iterative-quick-sort/ variant
     // a stack is simulated to keep track of the divided array parts
     public boolean quickStep(){
-
         // return true if stack is empty
         if (top == -1) {
             return false;
         }
-
         // high and low are popped off the stack
         // top is decremented after the pop
         high = stack[top--];
         low = stack[top--];
-
         // pivot is gonna be put in the right spot by the partition method
         pivot = partition(low, high);
-
         // when there are still items on the sides of the pivots
         // then push them on the stack
         if (pivot-1 > low) {
@@ -92,7 +88,6 @@ public class Model {
             stack[++top] = pivot+1;
             stack[++top] = high;
         }
-
         // return true if array is not sorted yet
         return true;
     }

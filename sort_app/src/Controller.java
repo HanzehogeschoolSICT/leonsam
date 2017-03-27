@@ -53,24 +53,26 @@ public class Controller extends Thread implements Initializable {
 
     @FXML
     public void step() {
-        switch (choicebox.getValue()) {
+        algorithm = choicebox.getValue();
+        doStep(algorithm);
+        repaint();
+    }
+
+    public boolean doStep(String algorithm) {
+        boolean notDone = true;
+        switch (algorithm) {
             case "bubblesort":
-                boolean notDone;
                 notDone = model.bubbleStep();
-                if (notDone == false) {JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);}
-                repaint();
                 break;
             case "insertionsort":
                 notDone = model.insertionStep();
-                if (notDone == false){JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);}
-                repaint();
                 break;
             case "quicksort":
                 notDone = model.quickStep();
-                if (notDone == false){JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);}
-                repaint();
                 break;
         }
+        if (notDone == false) {JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);}
+        return notDone;
     }
 
     @FXML
@@ -95,17 +97,7 @@ public class Controller extends Thread implements Initializable {
             public void run() {
                 boolean notDone = true;
                 while (notDone) {
-                    switch (algorithm) {
-                        case "bubblesort":
-                            notDone = model.bubbleStep();
-                            break;
-                        case "insertionsort":
-                            notDone = model.insertionStep();
-                            break;
-                        case "quicksort":
-                            notDone = model.quickStep();
-                            break;
-                    }
+                    notDone = doStep(algorithm);
                     repaint();
                     try {
                         sleep(getInterval());
@@ -113,7 +105,6 @@ public class Controller extends Thread implements Initializable {
                         return;
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
             }
         };
         thread.setDaemon(true);
