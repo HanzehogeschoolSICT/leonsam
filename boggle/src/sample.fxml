@@ -11,7 +11,6 @@
 
     <top>
         <ToolBar>
-            <Button text="new playboard" fx:id="newBoard" />
             <padding><Insets left="5" right="5" /> </padding>
 
             <Button text="find words" fx:id="findWords" onAction="#solve"/>

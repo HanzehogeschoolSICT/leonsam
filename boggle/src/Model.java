@@ -31,7 +31,7 @@ public class Model extends Observable {
 
     public void dictionaryBuilder(){
         try{
-            FileReader fileReader = new FileReader("/home/samikroon/IdeaProjects/leonsam/boggle/src/dict.txt");
+            FileReader fileReader = new FileReader("boggle/src/dict.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String word;
             while((word = bufferedReader.readLine()) != null){
