@@ -109,41 +109,34 @@ public class Controller extends Thread implements Initializable {
             }
         }
 
+        intervalThread();
+    }
 
+    public void intervalThread () {
         thread = new Thread() {
-          public void run() {
-              boolean notDone = true;
-
-              while (notDone) {
-
-                  switch (algorithm) {
-
-                      case "bubblesort":
-                          notDone = model.bubbleStep();
-                          break;
-
-                      case "insertionsort":
-                          notDone = model.insertionStep();
-                          break;
-
-                      case "quicksort":
-                          notDone = model.quickStep();
-                          break;
-
-                  }
-
-
-                  repaint();
-                  try {
-                      sleep(getInterval());
-                  } catch (InterruptedException e) {
-                      return;
-                  }
-              }
-
-              JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
-
-          }
+            public void run() {
+                boolean notDone = true;
+                while (notDone) {
+                    switch (algorithm) {
+                        case "bubblesort":
+                            notDone = model.bubbleStep();
+                            break;
+                        case "insertionsort":
+                            notDone = model.insertionStep();
+                            break;
+                        case "quicksort":
+                            notDone = model.quickStep();
+                            break;
+                    }
+                    repaint();
+                    try {
+                        sleep(getInterval());
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
+            }
         };
         thread.setDaemon(true);
         thread.start();
