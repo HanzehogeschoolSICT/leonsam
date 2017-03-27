@@ -29,6 +29,7 @@ public class Model extends Observable {
         boardBuilder();
     }
 
+    //convert wordlist file to dictionary
     public void dictionaryBuilder(){
         try{
             FileReader fileReader = new FileReader("boggle/src/dict.txt");
@@ -43,6 +44,7 @@ public class Model extends Observable {
         }
     }
 
+    //initialize the board
     public void boardBuilder(){
         playBoard = new String[boardSize][boardSize];
         Random random = new Random();
@@ -59,6 +61,7 @@ public class Model extends Observable {
         }
     }
 
+    //calls the recursive solver method for every letter on the board
     public void solver() {
         resetResults();
         for (int i = 0; i < boardSize; i++) {
@@ -68,6 +71,7 @@ public class Model extends Observable {
         }
     }
 
+    //searches for matches between board paths and the word list recursively
     public void recursiveSolver(String currentWord, boolean[][] history, int x, int y){
         boolean[][] temp = new boolean[boardSize][];
         for (int i = 0; i < boardSize; i++) {
@@ -95,6 +99,7 @@ public class Model extends Observable {
         if(x+1 < boardSize && y+1 < boardSize && !temp[x+1][y+1]){recursiveSolver(currentWord+playBoard[x+1][y+1], temp, x+1, y+1);}
     }
 
+    //sets size of the board
     public void setSize(int size) {
         this.boardSize = size;
         boardBuilder();

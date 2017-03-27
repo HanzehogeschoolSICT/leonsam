@@ -19,7 +19,7 @@ public class Model {
         shuffle(sortableObjects);
     }
 
-
+    //executes one step of bubble sort algorithm
     public boolean bubbleStep() {
         if (sortableObjects[location] > sortableObjects[location + 1]) {
             //swap
@@ -41,6 +41,7 @@ public class Model {
         }
     }
 
+    //executes one step of insertion sort algorithm
     public boolean insertionStep(){
         if(iLocation > 0) {
             if (sortableObjects[iLocation] < sortableObjects[iLocation - 1]) {
@@ -119,6 +120,7 @@ public class Model {
         }
     }
 
+    //swap function for quick sort algorithm
     private static void swap(int[] array, int firstElement, int secondElement) {
         int temp = array[firstElement];
         array[firstElement] = array[secondElement];

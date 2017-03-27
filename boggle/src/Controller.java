@@ -31,6 +31,7 @@ public class Controller implements Initializable, Observer{
     private Model model;
     protected ListProperty<String> listProperty = new SimpleListProperty<>();
 
+    //override JavaFX initializer
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new Model(this,4);
@@ -39,6 +40,7 @@ public class Controller implements Initializable, Observer{
         repaint(null);
     }
 
+    //method for refreshing GUI
     public void repaint(boolean[][] locationArray) {
         String[][] currPlayBoard = model.getPlayBoard();
         g.setFill(Color.BLACK);
@@ -63,6 +65,7 @@ public class Controller implements Initializable, Observer{
         }
     }
 
+
     @FXML
     public void solve() {
         model.solver();
@@ -72,6 +75,7 @@ public class Controller implements Initializable, Observer{
         listProperty.set(FXCollections.observableArrayList(model.getResults()));
     }
 
+    //set the size of the playboard, given in textfield
     @FXML
     public void setBoardSize() {
         int boardSize = 4;
@@ -94,6 +98,7 @@ public class Controller implements Initializable, Observer{
         }
     }
 
+    //handle MouseEvent when word is selected in the listview
     public void handleMouseClick(MouseEvent mouseEvent) {
         repaint(model.getResultMatrixes(listView.getSelectionModel().getSelectedIndex()));
     }

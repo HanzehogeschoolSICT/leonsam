@@ -25,7 +25,7 @@ public class Controller extends Thread implements Initializable {
     public static volatile boolean killFlag = false;
 
 
-    //fillRect(double x, double y, double w, double h
+    //override JavaFX initializer
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         g = canvas.getGraphicsContext2D();
@@ -33,7 +33,7 @@ public class Controller extends Thread implements Initializable {
         repaint();
     }
 
-
+    //method for refreshing GUI
     public void repaint() {
         int[] data = model.getSortableObjects();
         g.setFill(Color.LIGHTBLUE);
@@ -46,11 +46,13 @@ public class Controller extends Thread implements Initializable {
 
     }
 
+    //refreshing GUI
     @FXML
     public void reset () {
         this.initialize(null, null);
     }
 
+    //get sort algorithm from choicebox and execute doStep method
     @FXML
     public void step() {
         algorithm = choicebox.getValue();
@@ -58,6 +60,7 @@ public class Controller extends Thread implements Initializable {
         repaint();
     }
 
+    //executes one step of given algorithm
     public boolean doStep(String algorithm) {
         boolean notDone = true;
         switch (algorithm) {
@@ -75,6 +78,7 @@ public class Controller extends Thread implements Initializable {
         return notDone;
     }
 
+    //executes steps of algorithm given specific interval
     @FXML
     public void startWithInterval() {
         this.interval = 100;
@@ -92,6 +96,7 @@ public class Controller extends Thread implements Initializable {
         intervalThread();
     }
 
+    //starting interval thread
     public void intervalThread () {
         thread = new Thread() {
             public void run() {
@@ -111,12 +116,12 @@ public class Controller extends Thread implements Initializable {
         thread.start();
     }
 
-
+    //stopping interval thread
     public void stopIntervalThread() {
         thread.interrupt();
     }
 
-
+    //get interval
     public long getInterval() {
         return interval;
     }
