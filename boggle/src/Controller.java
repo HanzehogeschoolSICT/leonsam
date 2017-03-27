@@ -40,7 +40,6 @@ public class Controller implements Initializable, Observer{
     }
 
     public void repaint(boolean[][] locationArray) {
-
         String[][] currPlayBoard = model.getPlayBoard();
         g.setFill(Color.BLACK);
         g.fillRect(0, 0, 500, 500);
@@ -77,6 +76,7 @@ public class Controller implements Initializable, Observer{
     public void setBoardSize() {
         int boardSize = 4;
         String tf = sizeBoard.getText();
+        assert tf != null;
         if (!tf.equals("")) {
             try {
                 boardSize = Integer.parseInt(tf);

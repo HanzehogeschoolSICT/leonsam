@@ -40,18 +40,8 @@ public class Controller extends Thread implements Initializable {
         g.fillRect(0, 0, 400, 400);
 
         for(int i = 0; i < data.length; i++) {
-
             g.setFill(Color.DARKGRAY);
             g.fillRect(i * 20, 400 - data[i], 18, data[i]);
-
-/*            if(i == model.location || i == model.location+1) {
-                g.setFill(Color.ORANGE);
-                g.fillRect(i * 20, 400 - data[i], 18, data[i]);
-            }
-            if(i > model.getSortableObjects().length - model.counter - 1){
-                g.setFill(Color.RED);
-                g.fillRect(i * 20, 400 - data[i], 18, data[i]);
-            }*/
         }
 
     }
@@ -63,36 +53,24 @@ public class Controller extends Thread implements Initializable {
 
     @FXML
     public void step() {
-
         switch (choicebox.getValue()) {
-
             case "bubblesort":
                 boolean notDone;
                 notDone = model.bubbleStep();
-                if (notDone == false) {
-                    JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
-                }
+                if (notDone == false) {JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);}
                 repaint();
                 break;
-
             case "insertionsort":
                 notDone = model.insertionStep();
-                if (notDone == false){
-                    JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
-                }
+                if (notDone == false){JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);}
                 repaint();
                 break;
-
             case "quicksort":
                 notDone = model.quickStep();
-                if (notDone == false){
-                    JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);
-                }
+                if (notDone == false){JOptionPane.showMessageDialog(null, "Array fully sorted!", "Done", JOptionPane.INFORMATION_MESSAGE);}
                 repaint();
                 break;
-
         }
-
     }
 
     @FXML

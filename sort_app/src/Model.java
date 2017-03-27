@@ -21,7 +21,6 @@ public class Model {
 
 
     public boolean bubbleStep() {
-
         if (sortableObjects[location] > sortableObjects[location + 1]) {
             //swap
             swap(sortableObjects, location, location+1);
@@ -29,12 +28,10 @@ public class Model {
         } else {
             location ++;
         }
-
         if(location == sortableObjects.length-1-counter){
             location = 0;
             counter ++;
         }
-
         if(counter == sortableObjects.length-1){
             location = 0;
             counter = 0;
@@ -58,7 +55,6 @@ public class Model {
             iCounter++;
             iLocation = iCounter;
         }
-
         if(iCounter == sortableObjects.length){
             iCounter = 1;
             iLocation = 1;
@@ -122,8 +118,9 @@ public class Model {
     }
 
     public void print() {
-        for(int i=0; i<this.sortableObjects.length; i++){
-            System.out.println(this.sortableObjects[i]);
+        assert sortableObjects != null;
+        for(int i=0; i<sortableObjects.length; i++){
+            System.out.println(sortableObjects[i]);
         }
     }
 
